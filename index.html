@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#eee4df">
+<title>A little something for Anshika</title>
+<style>
+:root{--ink:#493b37;--muted:#8d7770;--rose:#a96d70;--paper:#fffdf8;--line:#e9ddd5}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;color:var(--ink);font-family:Georgia,'Times New Roman',serif;background:linear-gradient(135deg,#e8ded7,#f5eee8 48%,#e5d9d2);background-attachment:fixed}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.23;background-image:repeating-linear-gradient(0deg,transparent 0 3px,#fff 4px,transparent 5px)}
+main{width:min(900px,92%);margin:auto;padding:48px 0 60px;text-align:center}
+.eyebrow{font:10px Arial,sans-serif;letter-spacing:3px;text-transform:uppercase;color:#9a7770}
+h1{font-size:clamp(34px,7vw,54px);font-weight:normal;line-height:1.12;margin:15px 0 12px}
+.intro{font-size:16px;line-height:1.7;color:#786660;margin:0 auto;max-width:510px}
+.instruction{margin:34px 0 18px;font:10px Arial,sans-serif;letter-spacing:2px;text-transform:uppercase;color:#967d74}
+.grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:17px;max-width:850px;margin:auto}
+.envelope{border:0;background:transparent;padding:0;color:inherit;cursor:pointer;font:inherit;min-width:0}
+.envelope:focus-visible{outline:2px solid #a96d70;outline-offset:7px;border-radius:5px}
+.art{height:145px;position:relative;display:block;transition:transform .3s;filter:drop-shadow(0 12px 10px #46302a24)}
+.envelope:hover .art{transform:translateY(-5px) rotate(-1deg)}
+.env-body{position:absolute;inset:20px 0 0;border:1px solid #d7bdb0;border-radius:3px;background:linear-gradient(145deg,#e8cfc0,#dcbba9)}
+.env-back{position:absolute;inset:20px 0 0;background:linear-gradient(145deg,#ead7ca,#d9b9a8);clip-path:polygon(0 0,50% 52%,100% 0,100% 100%,0 100%);border-radius:3px}
+.flap{position:absolute;left:0;right:0;top:20px;height:78px;background:linear-gradient(160deg,#f0dfd4,#d9b8a8);clip-path:polygon(0 0,100% 0,50% 82%);filter:drop-shadow(0 2px 1px #9c786b33)}
+.front{position:absolute;left:0;right:0;bottom:0;height:88px;background:linear-gradient(145deg,#e8cdbd,#dcbba9);clip-path:polygon(0 0,50% 62%,100% 0,100% 100%,0 100%);border-radius:0 0 3px 3px}
+.seal{position:absolute;top:72px;left:50%;transform:translateX(-50%);width:30px;height:30px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#c98e86,#925b59 75%);box-shadow:0 2px 4px #51312d55,inset 0 1px 2px #f5d4c7;color:#f5e5d9;font:12px Georgia;display:grid;place-items:center}
+.label{display:block;margin-top:12px;font-size:14px;line-height:1.35;min-height:38px}
+.status{display:block;margin-top:4px;font:9px Arial,sans-serif;letter-spacing:1.4px;text-transform:uppercase;color:#9c8177}
+.envelope.opened .art{opacity:.72}
+.envelope.opened .seal{background:radial-gradient(circle at 35% 30%,#b9a69a,#8e776d 75%)}
+.counter{margin-top:26px;font:11px Arial,sans-serif;letter-spacing:1px;color:#8d7770}
+.track{height:3px;max-width:230px;margin:11px auto;background:#dfd0c7}
+.track span{height:100%;width:0;display:block;background:#a96d70;transition:width .3s}
+.closing{display:none;max-width:550px;margin:32px auto 0;padding:25px 25px 22px;background:#fdfaf5;border:1px solid #e5d8cf;box-shadow:0 10px 30px #59413912}
+.closing.show{display:block;animation:appear .45s ease}
+.closing p{font-size:19px;line-height:1.6;margin:0;color:#715b54}
+.signature{font:10px Arial,sans-serif;letter-spacing:2px;text-transform:uppercase;color:#a17e73;margin-top:16px}
+footer{margin-top:42px;font-size:12px;color:#9c8278}
+.modal{display:none;position:fixed;inset:0;z-index:5;background:#30231f99;align-items:center;justify-content:center;padding:18px}
+.modal.show{display:flex}
+.letter{position:relative;width:min(490px,100%);padding:42px 32px 30px;background:repeating-linear-gradient(var(--paper),var(--paper) 31px,#f0e7df 32px);box-shadow:0 24px 70px #20151266;border:1px solid #e7dbd2;animation:appear .35s ease}
+.letter:before{content:"";position:absolute;left:18px;top:0;bottom:0;border-left:1px solid #ead6d0}
+.close{position:absolute;right:13px;top:9px;border:0;background:none;font-size:25px;color:#8d7770;cursor:pointer}
+.letter-kicker{font:9px Arial,sans-serif;letter-spacing:2px;text-transform:uppercase;color:#a18176}
+.letter h2{font-size:28px;font-weight:normal;margin:12px 0 18px;color:#805c55}
+.letter p{font-size:17px;line-height:1.85;margin:0 0 24px;white-space:pre-line;color:#594943}
+.done{border:1px solid #a96d70;background:#a96d70;color:#fff;padding:11px 20px;font:11px Arial,sans-serif;letter-spacing:1px;text-transform:uppercase;cursor:pointer}
+@keyframes appear{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@media(max-width:650px){main{padding-top:35px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 16px;max-width:430px}.envelope:last-child{grid-column:1/-1;width:calc(50% - 8px);justify-self:center}.art{height:135px}.intro{font-size:15px}.letter{padding:38px 25px 25px}.letter p{font-size:16px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+
+#countdownGate{position:fixed;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;padding:24px;background:linear-gradient(145deg,#e8ded7,#f5eee8 48%,#e5d9d2);text-align:center}
+#countdownGate[hidden]{display:none}
+.count-card{width:min(500px,100%);padding:42px 25px;background:#fffdf8;border:1px solid #e5d8cf;box-shadow:0 18px 55px #59413920}
+.count-kicker{font:10px Arial,sans-serif;letter-spacing:3px;text-transform:uppercase;color:#9a7770}
+.count-card h2{font-size:clamp(30px,7vw,44px);font-weight:normal;line-height:1.15;margin:17px 0 12px;color:#805c55}
+.count-card p{font-size:15px;line-height:1.7;color:#786660}
+.timer{display:flex;justify-content:center;gap:10px;margin:27px 0 8px}
+.time-unit{min-width:66px;padding:13px 8px;background:#f4ece6;border:1px solid #e8dcd3}
+.time-unit strong{display:block;font:normal 29px Georgia,serif;color:#805c55}
+.time-unit span{display:block;margin-top:5px;font:9px Arial,sans-serif;letter-spacing:1.4px;text-transform:uppercase;color:#9a7770}
+.count-note{font:10px Arial,sans-serif;letter-spacing:1px;text-transform:uppercase;color:#a18176;margin-top:23px}
+@media(max-width:390px){.timer{gap:6px}.time-unit{min-width:58px;padding:11px 5px}.time-unit strong{font-size:25px}}
+
+</style>
+</head>
+<body>
+
+<div id="countdownGate">
+  <section class="count-card">
+    <div class="count-kicker">A little surprise is waiting</div>
+    <h2>For Anshika</h2>
+    <p>This little collection of letters will be ready at midnight.<br>Come back when the clock turns.</p>
+    <div class="timer" aria-live="polite">
+      <div class="time-unit"><strong id="days">00</strong><span>Days</span></div>
+      <div class="time-unit"><strong id="hours">00</strong><span>Hours</span></div>
+      <div class="time-unit"><strong id="minutes">00</strong><span>Minutes</span></div>
+      <div class="time-unit"><strong id="seconds">00</strong><span>Seconds</span></div>
+    </div>
+    <div class="count-note">November 2 · 12:00 AM · India time</div>
+  </section>
+</div>
+
+<main id="surprise" hidden>
+<div class="eyebrow">A small collection of notes · Day 2</div>
+<h1>Anshika, the little things<br>about u</h1>
+<p class="intro">I could tell u all of this at once.<br>But some things are nicer when opened slowly.</p>
+<div class="instruction">Pick a letter to open</div>
+<section class="grid" id="grid" aria-label="Five sealed letters"></section>
+<div class="counter" id="counter">0 / 5 letters opened</div>
+<div class="track"><span id="progress"></span></div>
+<section class="closing" id="closing">
+<p>And that's only five, Anshika. There are plenty more little things I adore about u. I'll save some for another day.</p>
+<div class="signature">There's more to come</div>
+</section>
+<footer>A little something, made just for u.</footer>
+</main>
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="letterTitle">
+<article class="letter">
+<button class="close" id="close" aria-label="Close letter">×</button>
+<div class="letter-kicker">A note for Anshika</div>
+<h2 id="letterTitle"></h2>
+<p id="letterText"></p>
+<button class="done" id="done">Put the letter away</button>
+</article>
+</div>
+<script>
+const notes=[
+["The way u care","It's in the little things u do and the way u notice when someone needs u. I hope u know how much that says about u, Anshika."],
+["Your ambitions","I love that u have dreams of ur own. Keep going after them, even on the days they feel far away. I'll always be rooting for u."],
+["That curious mind","I like how u question things and want to understand more. There's always something new to learn about the way ur mind works."],
+["Your sarcasm","Ur sarcasm deserves its own appreciation note. U make me laugh when I'm least prepared for it. Please never lose that side of u."],
+["Simply u","It's not one big thing. It's ur little habits, ur laugh, ur thoughts, and all the things that make u who u are. That's what I adore."]
+];
+const grid=document.getElementById("grid"),modal=document.getElementById("modal"),opened=new Set();
+notes.forEach((note,i)=>{
+ const b=document.createElement("button");b.type="button";b.className="envelope";
+ b.innerHTML='<span class="art"><span class="env-body"></span><span class="env-back"></span><span class="flap"></span><span class="front"></span><span class="seal">A</span></span><span class="label"></span><span class="status">Sealed</span>';
+ b.querySelector(".label").textContent=note[0];b.setAttribute("aria-label","Open letter: "+note[0]);
+ b.addEventListener("click",()=>{
+  opened.add(i);document.getElementById("letterTitle").textContent=note[0];document.getElementById("letterText").textContent=note[1];
+  b.classList.add("opened");b.querySelector(".status").textContent="Opened";
+  document.getElementById("counter").textContent=opened.size+" / 5 letters opened";
+  document.getElementById("progress").style.width=(opened.size*20)+"%";
+  if(opened.size===5)document.getElementById("closing").classList.add("show");
+  modal.classList.add("show");
+ });grid.appendChild(b);
+});
+function closeLetter(){modal.classList.remove("show")}
+document.getElementById("close").addEventListener("click",closeLetter);
+document.getElementById("done").addEventListener("click",closeLetter);
+modal.addEventListener("click",e=>{if(e.target===modal)closeLetter()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeLetter()});
+</script>
+
+<script>
+(function(){
+  // Midnight at the start of 2 November 2026, India Standard Time.
+  const launchAt = new Date("2026-11-02T00:00:00+05:30").getTime();
+  const gate = document.getElementById("countdownGate");
+  const surprise = document.getElementById("surprise");
+  function updateCountdown(){
+    const remaining = launchAt - Date.now();
+    if(remaining <= 0){
+      gate.hidden = true;
+      surprise.hidden = false;
+      return;
+    }
+    const totalSeconds = Math.floor(remaining / 1000);
+    const days = Math.floor(totalSeconds / 86400);
+    const hours = Math.floor((totalSeconds % 86400) / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+    document.getElementById("days").textContent = String(days).padStart(2,"0");
+    document.getElementById("hours").textContent = String(hours).padStart(2,"0");
+    document.getElementById("minutes").textContent = String(minutes).padStart(2,"0");
+    document.getElementById("seconds").textContent = String(seconds).padStart(2,"0");
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+})();
+</script>
+
+</body>
+</html>
